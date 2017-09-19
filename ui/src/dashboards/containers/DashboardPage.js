@@ -379,6 +379,7 @@ DashboardPage.propTypes = {
       self: string,
     }),
   }).isRequired,
+  sources: arrayOf(shape({})).isRequired,
   params: shape({
     sourceID: string.isRequired,
     dashboardID: string.isRequired,
@@ -431,7 +432,6 @@ DashboardPage.propTypes = {
     status: shape(),
   }).isRequired,
   errorThrown: func,
-  sources: arrayOf(shape()),
 }
 
 const mapStateToProps = state => {

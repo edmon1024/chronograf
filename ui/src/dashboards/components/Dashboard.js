@@ -7,6 +7,7 @@ import FancyScrollbar from 'shared/components/FancyScrollbar'
 
 const Dashboard = ({
   source,
+  sources,
   onZoom,
   dashboard,
   onAddCell,
@@ -60,6 +61,7 @@ const Dashboard = ({
               timeRange={timeRange}
               autoRefresh={autoRefresh}
               source={source}
+              sources={sources}
               onPositionChange={onPositionChange}
               onEditCell={onEditCell}
               onRenameCell={onRenameCell}
@@ -118,6 +120,7 @@ Dashboard.propTypes = {
       proxy: string,
     }).isRequired,
   }).isRequired,
+  sources: arrayOf(shape({})).isRequired,
   autoRefresh: number.isRequired,
   timeRange: shape({}).isRequired,
   onOpenTemplateManager: func.isRequired,

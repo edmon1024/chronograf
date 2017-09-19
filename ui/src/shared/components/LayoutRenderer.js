@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 
 import ReactGridLayout, {WidthProvider} from 'react-grid-layout'
+import _ from 'lodash'
 
 import NameableGraph from 'shared/components/NameableGraph'
 import RefreshingGraph from 'shared/components/RefreshingGraph'
@@ -135,7 +136,7 @@ class LayoutRenderer extends Component {
   // Generates cell contents based on cell type, i.e. graphs, news feeds, etc.
   generateVisualizations() {
     const {
-      source,
+      sources,
       cells,
       onEditCell,
       onCancelEditCell,
@@ -153,6 +154,12 @@ class LayoutRenderer extends Component {
 
     return cells.map(cell => {
       const {type, h, axes} = cell
+      let source = _.get(cell, ['queries', '0', 'source'], null)
+      if (!source) {
+        source = this.props.source.links.self
+      }
+
+      source = sources.find(s => s.links.self === source)
 
       return (
         <div key={cell.i}>
@@ -306,6 +313,7 @@ LayoutRenderer.propTypes = {
   isEditable: bool,
   onCancelEditCell: func,
   onZoom: func,
+  sources: arrayOf(shape({})).isRequired,
 }
 
 export default LayoutRenderer
